@@ -1,7 +1,5 @@
 # v-money Mask for Vue.js
 
-![The Mask Money](https://cdn-images-1.medium.com/max/600/1*Rpc289FpghuHrnzyVpOUig.gif)
-
 ## Features
 
 - Lightweight (<2KB gzipped)
