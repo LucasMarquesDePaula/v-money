@@ -1,7 +1,7 @@
 export default {
-  prefix: '',
-  suffix: '',
-  thousands: ',',
-  decimal: '.',
+  prefix: "",
+  suffix: "",
+  thousands: ",",
+  decimal: ".",
   precision: 2
-}
+};

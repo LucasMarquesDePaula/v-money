@@ -36,11 +36,11 @@ function bind(el, binding, vnode) {
   }
 
   function getTarget(el) {
-    // v-money used on a component that's not a input
-    if (el.tagName.toLocaleUpperCase() !== "INPUT") {
+    if (el.tagName.toLocaleUpperCase() === "INPUT") {
       return el;
     }
 
+    // v-money used on a component that's not a input
     const els = el.getElementsByTagName("input");
     if (els.length !== 1) {
       throw new Error(`v-money requires 1 input, found ${els.length}`);
