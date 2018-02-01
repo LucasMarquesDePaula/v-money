@@ -1,35 +1,51 @@
-import {format, setCursor, event} from './utils'
-import assign from './assign'
-import defaults from './options'
+import { format, setCursor } from "./utils";
+import assign from "./assign";
+import defaults from "./options";
 
-export default function (el, binding) {
-  if (!binding.value) return
-  var opt = assign(defaults, binding.value)
+export default { bind };
 
-  // v-money used on a component that's not a input
-  if (el.tagName.toLocaleUpperCase() !== 'INPUT') {
-    var els = el.getElementsByTagName('input')
-    if (els.length !== 1) {
-      // throw new Error("v-money requires 1 input, found " + els.length)
-    } else {
-      el = els[0]
+function bind(el, binding, vnode) {
+  const opt = assign(defaults, binding.value);
+
+  let target = getTarget(el);
+
+  target.addEventListener("input", eventListener);
+  target.addEventListener("change", eventListener);
+
+  target.addEventListener("focus", () => {
+    setCursor(target, target.value.length - opt.suffix.length);
+  });
+
+  target.dispatchEvent(new Event("input"));
+
+  function run(target, opt) {
+    let positionFromEnd = target.value.length - target.selectionEnd;
+    target.value = format(target.value, opt);
+    positionFromEnd = Math.max(positionFromEnd, opt.suffix.length); // right
+    positionFromEnd = target.value.length - positionFromEnd;
+    positionFromEnd = Math.max(positionFromEnd, opt.prefix.length + 1); // left
+    setCursor(target, positionFromEnd);
+  }
+
+  function eventListener(event) {
+    if (!event.isTrusted) {
+      return;
     }
+    run(target, opt);
+    target.dispatchEvent(new Event(event.type));
   }
 
-  el.oninput = function () {
-    var positionFromEnd = el.value.length - el.selectionEnd
-    el.value = format(el.value, opt)
-    positionFromEnd = Math.max(positionFromEnd, opt.suffix.length) // right
-    positionFromEnd = el.value.length - positionFromEnd
-    positionFromEnd = Math.max(positionFromEnd, opt.prefix.length + 1) // left
-    setCursor(el, positionFromEnd)
-    el.dispatchEvent(event('change')) // v-model.lazy
-  }
+  function getTarget(el) {
+    // v-money used on a component that's not a input
+    if (el.tagName.toLocaleUpperCase() !== "INPUT") {
+      return el;
+    }
 
-  el.onfocus = function () {
-    setCursor(el, el.value.length - opt.suffix.length)
-  }
+    const els = el.getElementsByTagName("input");
+    if (els.length !== 1) {
+      throw new Error(`v-money requires 1 input, found ${els.length}`);
+    }
 
-  el.oninput()
-  el.dispatchEvent(event('input')) // force format after initialization
+    return els[0];
+  }
 }

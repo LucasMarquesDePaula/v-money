@@ -1,8 +1,12 @@
 {
   "name": "v-money",
-  "version": "0.8.1",
+  "version": "0.8.2",
   "description": "Vue currency input/directive mask",
   "main": "dist/v-money.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/LucasMarquesDePaula/v-money.git"
+  },
   "scripts": {
     "size": "size-limit",
     "upgrade:check": "ncu",
@@ -39,6 +43,7 @@
     "jest": "^21.2.1",
     "npm-check-updates": "^2.13.0",
     "size-limit": "^0.11.6",
-    "vuetify": "^0.16.7"
+    "vue": "^2.5.13",
+    "vuetify": "^0.17.6"
   }
 }
