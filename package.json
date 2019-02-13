@@ -1,49 +1,23 @@
 {
   "name": "v-money",
-  "version": "0.8.2",
-  "description": "Vue currency input/directive mask",
-  "main": "dist/v-money.js",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/LucasMarquesDePaula/v-money.git"
-  },
+  "version": "1.0.0",
   "scripts": {
-    "size": "size-limit",
-    "upgrade:check": "ncu",
-    "upgrade:apply": "ncu -a",
-    "dev": "vue build ./src/docs/docs.vue --config ./src/docs/build.config.js --host 0.0.0.0",
-    "build": "vue build ./src/index.js --config ./build.config.js --dist ./dist/ --prod --lib",
-    "docs:build": "vue build ./src/docs/docs.vue --config ./src/docs/build.config.js --dist ./docs/ --prod",
-    "docs:serve": "open http://localhost:5000/docs/ && serve ./",
-    "compile": "npm run build -- --disable-compress",
-    "test": "jest"
+    "dev": "node src/dev",
+    "build": "node src/build"
   },
-  "keywords": [
-    "vue",
-    "input",
-    "mask",
-    "directive",
-    "currency",
-    "money"
-  ],
-  "files": [
-    "dist/"
-  ],
-  "size-limit": [
-    {
-      "path": "dist/v-money.js",
-      "limit": "1.6 KB"
-    }
-  ],
-  "author": "Marcos Neves <marcos.neves@gmail.com> (https://vuejs-tips.github.io/)",
-  "license": "MIT",
   "devDependencies": {
-    "babel-jest": "^21.2.0",
-    "babel-preset-vue-app": "^1.3.1",
-    "jest": "^21.2.1",
-    "npm-check-updates": "^2.13.0",
-    "size-limit": "^0.11.6",
-    "vue": "^2.5.13",
-    "vuetify": "^0.17.6"
+    "@babel/core": "7.2.2",
+    "@babel/preset-env": "7.2.3",
+    "@types/jquery": "3.3.29",
+    "babel-eslint": "10.0.1",
+    "babel-loader": "8.0.4",
+    "core-js": "2.6.4",
+    "eslint": "5.11.0",
+    "eslint-loader": "2.1.1",
+    "express": "4.16.4",
+    "uglifyjs-webpack-plugin": "2.1.0",
+    "webpack": "4.28.2",
+    "webpack-dev-middleware": "3.5.2",
+    "webpack-hot-middleware": "2.24.3"
   }
 }
